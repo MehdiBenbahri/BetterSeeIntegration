@@ -1,0 +1,34 @@
+{
+  "name" :"Better See",
+  "manifest_version" : 3,
+  "version" :"0.4",
+  "description" :"une extention pour y voir plus clair",
+  "browser_action" :
+  {
+    "default_popup" :"index.html"
+  },
+     "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+	"commands": {
+		"funcA": {
+		"suggested_key": {
+		"default": "Ctrl+A"
+			},
+		"description": "Executes Func A"
+				}
+		},
+		
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "activeTab",
+    "storage",
+    "tts",
+    "ttsEngine",
+    "background",
+	"<all_urls>"
+  ]
+}
