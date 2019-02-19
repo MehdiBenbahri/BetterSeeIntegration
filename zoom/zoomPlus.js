@@ -1,5 +1,5 @@
 var Page = document.body;
-
+document.body.zoom = 1;
 
 if (Page.style.zoom  == 1){
     Page.style.zoom  = 2;
