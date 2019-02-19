@@ -1,3 +1,16 @@
+/*Animation des éléments : */
+
+$( "#opBtn" ).effect("bounce",{
+    time : 10,
+    distance : 20
+},"slow");
+$( "#para" ).effect("bounce",{
+    time : 10,
+    distance : 20
+},"slow");
+$( "#vitesse" ).effect("slide",{ direction : 'right'},500);
+$( "#btnoptiondalt" ).effect("slide",{ direction : 'down'},500);
+
 var pagecourante = window.location.href;
 pagecourante = pagecourante.split("/").pop();
 
@@ -527,8 +540,8 @@ if (document.getElementById('inversion') !== null) {
 /* button play lis tout le texte de la page */
 if (document.getElementById('play') !== null) {
     document.getElementById("play").addEventListener("click", function() {
-
-        chrome.tabs.executeScript({
+        injectScript("script/play.js")
+        /*chrome.tabs.executeScript({
             code: "document.body.innerText;"
         }, function(selection) {
             var userLang = navigator.language || navigator.userLanguage;
@@ -536,7 +549,7 @@ if (document.getElementById('play') !== null) {
                 'lang': userLang,
                 'rate': parseInt(rate, 10)
             });
-        });
+        });*/
     });
 }
 

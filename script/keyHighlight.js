@@ -21,7 +21,10 @@ function checkKey(e) {
     e = e || window.event;
 
     if (e.keyCode == '37') {
-        synth.cancel();
+        if (synth.speaking){
+            synth.cancel();
+        }
+
         //on supprime tout le surlignage avant tout.
         for(var i = 0 ; i < elems.length ; i++){
             elems[i].classList.remove("cssKeyCodeClass");
@@ -30,7 +33,7 @@ function checkKey(e) {
         //si l'index est à 0, on ne peut pas le mettre à -1
         if (index !== 0){
             index--;
-            elems[index].classList.add("cssKeyCodeClass")
+            elems[index].classList.add("cssKeyCodeClass");
             elems[index].focus();
 
             if (elems[index].innerText !== "" && typeof(elems[index].innerText) === "string"){
@@ -43,7 +46,7 @@ function checkKey(e) {
                 if (elems[index].alt !== "" || elems[index].alt !== " " || elems[index].alt !== null || elems[index].alt !== undefined){
                     var msg = new SpeechSynthesisUtterance("image don la description est, " + elems[index].alt);
                     synth.speak(msg);
-                    console.log(elems[index].alt);
+
                 }
                 else{
                     var msg = new SpeechSynthesisUtterance("image qui n'a pas de description.");
@@ -55,7 +58,9 @@ function checkKey(e) {
 
     }
     else if (e.keyCode == '39') {
-        synth.cancel();
+        if (synth.speaking){
+            synth.cancel();
+        }
         //on supprime tout le surlignage avant tout.
         for(var i = 0 ; i < elems.length ; i++){
             elems[i].classList.remove("cssKeyCodeClass");
@@ -69,7 +74,9 @@ function checkKey(e) {
             elems[index].focus();
 
             if (elems[index].innerText !== "" && typeof(elems[index].innerText) === "string"){
-                synth.cancel();
+                if (synth.speaking){
+                    synth.cancel();
+                }
                 var msg = new SpeechSynthesisUtterance(elems[index].innerText);
                 synth.speak(msg);
 
@@ -78,7 +85,7 @@ function checkKey(e) {
                 if (elems[index].alt !== "" || elems[index].alt !== " " || elems[index].alt !== null || elems[index].alt !== undefined){
                     var msg = new SpeechSynthesisUtterance("image don la description est, " + elems[index].alt);
                     synth.speak(msg);
-                    console.log(elems[index].alt);
+
                 }
                 else{
                     var msg = new SpeechSynthesisUtterance("image qui n'a pas de description.");
@@ -87,6 +94,19 @@ function checkKey(e) {
 
             }
         }
+
+    }
+    else if (e.keyCode == '40') {
+        console.log(elems[index].innerText);
+        if (elems[index].tagName === "IMG"){
+            var msg = new SpeechSynthesisUtterance(elems[index].alt);
+            synth.speak(msg);
+        }
+        else{
+            var msg = new SpeechSynthesisUtterance(elems[index].innerText);
+            synth.speak(msg);
+        }
+
 
     }
 
