@@ -1,6 +1,6 @@
 'use strict';
 chrome.storage.sync.get(['avoui'], function(check) {
-    if (check.avoui IS NULL) {
+    if (check.avoui === null) {
         chrome.runtime.onInstalled.addListener(function() {
             chrome.tabs.create({
                 url: "option.html"
