@@ -12,13 +12,31 @@
       "persistent": false
     },
 	"commands": {
-		"funcA": {
-		"suggested_key": {
-		"default": "Ctrl+A"
+		"page": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y"
 			},
-		"description": "Executes Func A"
-				}
+			"description": "tout lire"
 		},
+		"pause": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Z"
+			},
+			"description": "pause le tts"
+		},
+		"resume": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Z"
+			},
+			"description": "Reprend la lecture"
+		},
+		"stop": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Z"
+			},
+			"description": "arrête le tts"
+		}
+	},
 		
   "permissions": [
     "https://*/*",

@@ -1,4 +1,4 @@
-  // protanomaly
+// protanomaly
 
 if (document.getElementById("styleID612481")) {
     stylingID = document.getElementById("styleID612481").remove();

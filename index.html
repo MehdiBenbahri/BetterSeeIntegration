@@ -13,53 +13,64 @@
 </head>
 <body>
 <div class="red">
-    <hr>
-    <h5><span class="badge badge-light">Options pour malvoyants :</span></h5>
-    <div class="option">
-        <button title="lecture de la selection" id="readOnSelect" class="btn btn-info" type="button">
-            <i title="lecture de la selection" class="fas fa-mouse-pointer"></i></button>
-        <button id="play" title="lecture" class="btn btn-info" type="button">
-            <i title="lecture de la selection" class="fas fa-play"></i></button>
-        <button id="resume" title="pause" class="btn btn-info" type="button" style="display : none;">
-            <i title="lecture de la selection" id="reCenter" class="fas fa-play-circle"></i></button>
-        <button id="pause" title="reprendre" class="btn btn-info" type="button">
-            <i title="lecture de la selection" id="reCenter" class="fas fa-pause"></i></button>
-        <button id="stop" title="stop" class="btn btn-info" type="button">
-            <i title="lecture de la selection" class="fas fa-stop"></i></button>
-        <button id="zoomPlus" title="zoomer plus" class="btn btn-info" type="button">
-            <i title="lecture de la selection" class="fas fa-search-plus"></i>
+    <div id='vue'>
 
-            <button id="zoomMoins" title="zoomer moins" class="btn btn-info" type="button">
-                <i class="fas fa-search-minus"></i>
+        <span class="btnParam">
+            <button class="btn btn-info btn-sm" id="para"><a style="color :white;" href="option.html">Configuration <i class="fas fa-cogs"></i></a></button>
+        </span>
+        <hr>
+        <h5><span class="badge badge-light">Options pour malvoyants :</span></h5>
+        <div class="option">
+            <button id="readOnSelect" class="btn btn-info" type="button">
+                <i class="fas fa-mouse-pointer"></i></button>
+            <button id="play" title="play" class="btn btn-info" type="button">
+                <i class="fas fa-play"></i></button>
+            <button id="resume" title="reprendre" class="btn btn-info" type="button" style="display : none;">
+                <i id="reCenter" class="fas fa-play-circle"></i></button>
+            <button id="pause" title="pause" class="btn btn-info" type="button">
+                <i id="reCenter" class="fas fa-pause"></i></button>
+            <button id="stop" title="stop" class="btn btn-info" type="button">
+                <i class="fas fa-stop"></i></button>
+            <button id="zoomPlus" class="btn btn-info" type="button">
+                <i class="fas fa-search-plus"></i>
 
-    </div>
-    <hr>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="rate"><h5><span class="badge badge-light">Vitesse de lecture : </span></h5></label>
-                    <input title="vitesse de lecture" value="1.0" min="1.0" step="1.0" max="8.0" list="tickmarks" type="range" class="form-control-range" id="rate">
+                <button id="zoomMoins" class="btn btn-info" type="button">
+                    <i class="fas fa-search-minus"></i>
+
+                    <button id="inversion" class="btn btn-info" type="button">
+                        <i class="fas fa-palette"></i></button>
+
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="rate"><h5><span class="badge badge-light">Vitesse de lecture : </span></h5></label>
+                        <input value="1.0" min="1.0" step="1.0" max="8.0" list="tickmarks" type="range"
+                               class="form-control-range" id="rate">
+                    </div>
+                    <datalist id="tickmarks">
+                        <option value="1.0"></option>
+                        <option value="2.0"></option>
+                        <option value="3.0"></option>
+                        <option value="4.0"></option>
+                        <option value="5.0"></option>
+                        <option value="6.0"></option>
+                        <option value="7.0"></option>
+                        <option value="8.0"></option>
+                    </datalist>
                 </div>
-                <datalist id="tickmarks">
-                    <option value="1.0"></option>
-                    <option value="2.0"></option>
-                    <option value="3.0"></option>
-                    <option value="4.0"></option>
-                    <option value="5.0"></option>
-                    <option value="6.0"></option>
-                    <option value="7.0"></option>
-                    <option value="8.0"></option>
-                </datalist>
-            </div>
-            <div class="col">
-                <h5><span class="badge badge-light">Assistant de lecture : </span></h5>
+                <div class="col" id='asislect'>
+                    <h5><span class="badge badge-light">Assistant de lecture : </span></h5>
 
+                </div>
             </div>
         </div>
     </div>
     <hr>
-    <button title="options daltoniens" class="btn btn-light btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample"
+    <button id='btnoptiondalt' class="btn btn-light btn-sm" type="button" data-toggle="collapse"
+            data-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample">
         <b>Afficher les options pour daltoniens </b> <i class="fas fa-caret-down"></i>
     </button>
@@ -68,50 +79,50 @@
     <div class="collapse" id="collapseExample">
         <form class="listDalto">
             <div class="">
-                <input title="désactiver les filtres daltoniens" id="radio-0" class="radio-custom" name="radio-group" type="radio" checked>
-                <label title="désactiver les filtres daltoniens" for="radio-0" class="radio-custom-label">Normal</label>
+                <input id="radio-0" class="radio-custom" name="radio-group" type="radio" checked>
+                <label for="radio-0" class="radio-custom-label">Normal</label>
             </div>
 
             <div>
-                <input title="filtre Achromatomalie" id="radio-1" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Achromatomalie" for="radio-1" class="radio-custom-label">Achromatomalie</label>
+                <input id="radio-1" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-1" class="radio-custom-label">Achromatomalie</label>
             </div>
 
             <div>
-                <input title="filtre Achromatomalie (forte)" id="radio-2" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Achromatomalie (forte)" for="radio-2" class="radio-custom-label">Achromatomalie (forte)</label>
+                <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-2" class="radio-custom-label">Achromatomalie (forte)</label>
             </div>
 
             <div>
-                <input title="filtre Deutéranopie" id="radio-3" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Deutéranopie" for="radio-3" class="radio-custom-label">Deutéranopie</label>
+                <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-3" class="radio-custom-label">Deutéranopie</label>
             </div>
 
             <div>
-                <input title="filtre Deutéranomalie" id="radio-4" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Deutéranomalie" for="radio-4" class="radio-custom-label">Deutéranomalie</label>
+                <input id="radio-4" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-4" class="radio-custom-label">Deutéranomalie</label>
             </div>
 
             <div>
-                <input title="filtre Protanopie" id="radio-5" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Protanopie" for="radio-5" class="radio-custom-label">Protanopie</label>
+                <input id="radio-5" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-5" class="radio-custom-label">Protanopie</label>
             </div>
 
             <div>
-                <input title="filtre Protanomalie" id="radio-6" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Protanomalie" for="radio-6" class="radio-custom-label">Protanomalie</label>
+                <input id="radio-6" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-6" class="radio-custom-label">Protanomalie</label>
             </div>
 
             <div>
-                <input title="filtre Tritanopie" id="radio-7" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Tritanopie" for="radio-7" class="radio-custom-label">Tritanopie</label>
+                <input id="radio-7" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-7" class="radio-custom-label">Tritanopie</label>
             </div>
 
             <div>
-                <input title="filtre Tritanomalie" id="radio-8" class="radio-custom" name="radio-group" type="radio">
-                <label title="filtre Tritanomalie" for="radio-8" class="radio-custom-label">Tritanomalie</label>
+                <input id="radio-8" class="radio-custom" name="radio-group" type="radio">
+                <label for="radio-8" class="radio-custom-label">Tritanomalie</label>
             </div>
-            <script src="../script/colorblindListener.js"></script>
+            <script src="../script/colorblindListener.js"></script
         </form>
     </div>
 
@@ -119,11 +130,10 @@
     <hr>
 </div>
 <div class="corner-button">
-    <script src="jquery.min.js"></script>
+    <script src="jquery.js"></script>
     <script src="ressources/bootstrap/js/bootstrap.js"></script>
-    <script src="script/boutonVocaux.js"></script>
     <script src="script.js"></script>
-
+    <script src="popup.js"></script>
 </div>
 
 </body>

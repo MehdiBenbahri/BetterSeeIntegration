@@ -1,39 +1,51 @@
-body{
+body {
     width: 500px;
+    font-family: "Helvetica Neue",Helvetica,"Times New Roman";
 }
-.option{
+
+.option {
     box-shadow: inset 2px 2px rgba(208, 210, 208, 0.25);
-    padding-top : 8px;
+    padding-top: 8px;
     padding-bottom: 8px;
-    background-color : #f8f9fa;
-    display : flex ;
+    background-color: #f8f9fa;
+    display: flex;
     justify-content: space-around;
 }
-.btn-info{
+
+.btn-info {
     box-shadow: #126171 2px 2px;
 }
-.btn-info:focus{
-    box-shadow: inset #126171 2px 2px !important;
-    background-color : #1c8ba3;
-    transition-duration: 250ms;
-}
-.btn-light{
+
+.btn-light {
     box-shadow: inset rgba(208, 210, 208, 0.25) 2px 2px;
 }
-.badge{
+
+.badge {
     box-shadow: inset 2px 2px rgba(208, 210, 208, 0.25);
 }
-.listDalto{
-    margin-top : 20px;
-    display : flex;
+
+.listDalto {
+    margin-top: 20px;
+    display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin-left: 5px;
     margin-right: 5px;
-    background-color : #f8f9fa;
+    background-color: #f8f9fa;
     box-shadow: inset 2px 2px rgba(208, 210, 208, 0.25);
 }
-.onOff{
-    margin-left : 20%;
 
+.onOff {
+    margin-left: 20%;
+
+}
+.btnParam{
+    display:flex;
+    justify-content: flex-end;
+}
+.myOptions{
+    zoom : 2;
+    display : flex;
+    justify-content: space-between;
+    margin-left : 5px;
 }
