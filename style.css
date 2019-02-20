@@ -53,3 +53,66 @@ body {
     margin-right: 10px;
     margin-top : 5px;
 }
+.optionBody{
+    background-color : #138496;
+}
+.optionBody,.optionHtml{
+    height: 100%;
+}
+.sideBar{
+    width: 350px;
+    height: 100%;
+    z-index: 1;
+    position: fixed;
+    background-color: #ffffff;
+    -webkit-box-shadow: 6px 1px 31px 1px rgba(0,0,0,0.32);
+    -moz-box-shadow: 6px 1px 31px 1px rgba(0,0,0,0.32);
+    box-shadow: 6px 1px 31px 1px rgba(0,0,0,0.32);
+}
+.ulOption{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around !important;
+}
+.logoOption{
+    width: 50%;
+    height: 50%;
+    border : rgba(0, 0, 0, 0.04) 2px solid;
+    border-radius: 50%;
+    background-color : #fcfcfc;
+    -webkit-box-shadow: inset 6px 1px 31px 1px rgba(0,0,0,0.32);
+    -moz-box-shadow: inset 6px 1px 31px 1px rgba(0,0,0,0.32);
+    box-shadow: inset 6px 1px 31px 1px rgba(0,0,0,0.32);
+}
+.elemOption{
+    margin-top : 10px;
+    margin-bottom: 10px;
+}
+.options{
+    margin-left : 100%;
+    margin-right : 100%;
+    width: 850px;
+    background-color : white;
+    padding : 15px;
+    -webkit-box-shadow: 6px 1px 31px 1px rgba(0,0,0,0.32);
+    -moz-box-shadow: 6px 1px 31px 1px rgba(0,0,0,0.32);
+    box-shadow: 6px 1px 31px 1px rgba(0,0,0,0.32);
+}
+.fake{
+    opacity: 0;
+}
+.tableOption{
+    white-space:nowrap;
+    width: 500px;
+}
+.fonce{
+    background-color : rgba(0, 0, 0, 0.050);
+}
+.enregistre{
+    display : flex;
+    justify-content: flex-end;
+}
+.credits{
+    color : #4a464b;
+}

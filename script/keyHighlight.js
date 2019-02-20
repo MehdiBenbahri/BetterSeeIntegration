@@ -1,6 +1,6 @@
 var style = document.createElement('style');
 style.type = 'text/css';
-style.innerHTML = '.cssKeyCodeClass{ background-color : rgba(215, 104, 44, 0.2); !important; border:1px dashed #b04d30 !important; }';
+style.innerHTML = '.cssKeyCodeClass{ background-color : rgba(215, 104, 44, 0.2); !important; border:1px dashed #b04d30 !important; font-size : 120%; }';
 document.getElementsByTagName('head')[0].appendChild(style);
 
 var elems = document.querySelectorAll('p,li,a,button,input,h1,h2,h3,h4,h5,h6,i,b,u,small,div,span,label,img');

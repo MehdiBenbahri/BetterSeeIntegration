@@ -12,7 +12,7 @@ else if(Page.style.zoom  == 3){
     Page.style.zoom  = 4;
 }
 else{
-    if (Page.style.zoom === 4){
+    if (Page.style.zoom == 4){
         Page.style.zoom  = 2;
     }
     else{

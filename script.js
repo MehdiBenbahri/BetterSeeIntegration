@@ -1,15 +1,36 @@
 /*Animation des éléments : */
+$("#optionDocu").hide();
+$("#optionPropos").hide();
+$("#optionParam").effect("slide", {direction: "down"});
 
-$( "#opBtn" ).effect("bounce",{
-    time : 10,
-    distance : 20
-},"slow");
-$( "#para" ).effect("bounce",{
-    time : 10,
-    distance : 20
-},"slow");
-$( "#vitesse" ).effect("slide",{ direction : 'right'},500);
-$( "#btnoptiondalt" ).effect("slide",{ direction : 'down'},500);
+
+$("#btnParam").click(function () {
+    $("#optionPropos").hide("slide", {direction: "up"});
+    $("#optionDocu").hide("slide", {direction: "up"});
+    $("#optionParam").show("slide", {direction: "down"});
+});
+$("#btnDocu").click(function () {
+    $("#optionPropos").hide("slide", {direction: "up"});
+    $("#optionParam").hide("slide", {direction: "up"});
+    $("#optionDocu").show("slide", {direction: "down"});
+});
+$("#btnPropos").click(function () {
+    $("#optionParam").hide("slide", {direction: "up"});
+    $("#optionDocu").hide("slide", {direction: "up"});
+    $("#optionPropos").show("slide", {direction: "down"});
+});
+
+$("#opBtn").effect("bounce", {
+    time: 10,
+    distance: 20
+}, "slow");
+$("#para").effect("bounce", {
+    time: 10,
+    distance: 20
+}, "slow");
+$(".animGauche").effect("slide", {direction: 'down'}, 500);
+$("#vitesse").effect("slide", {direction: 'right'}, 500);
+$("#btnoptiondalt").effect("slide", {direction: 'down'}, 500);
 
 var pagecourante = window.location.href;
 pagecourante = pagecourante.split("/").pop();
@@ -21,73 +42,56 @@ function injectScript(fileName) {
     });
 }
 
-/*
-if (pagecourante === 'option.html')
-{
-chrome.commands.onCommand.addListener(function(command) {
-if (command == 'oui')
-{
-	chrome.tts.speak('oui');
-	window.close();
-	chrome.storage.sync.set({'avoui': 1}, function() {
-	});
-	chrome.storage.sync.set({'avnon': 0}, function() {
-	});
-}
-else if (command == 'non')
-{
-   	chrome.storage.sync.set({'avnon': 1}, function() {
-	});
-	chrome.storage.sync.set({'avoui': 0}, function() {
-	});
-	chrome.tts.speak('Non');
-	//Je me TP au deuxieme menu option qui demande si la personne est mal voyante et/ou daltonienne.
-	window.location.href="option2.html";
-}
-});
-}
-if (pagecourante === 'option2.html')
-{
-chrome.tts.speak('Etes-vous mal voyant ? Touche controle et touche M pour oui. Touche controle F pour non. Etes vous daltonien ? Touche ALT et D pour oui. Touche ALT et F pour');
-if (command == 'mvoui')
-{
-    	chrome.storage.sync.set({'mvoui': 1}, function() {
-	});
-	chrome.storage.sync.set({'mvnon': 0}, function() {
-	});
-	chrome.tts.speak('Oui');
-}
-else if (command == 'mvnon')
-{
-    	chrome.storage.sync.set({'mvoui': 0}, function() {
-	});
-	chrome.storage.sync.set({'mvnon': 1}, function() {
-	});
-	chrome.tts.speak('Non');
-}
-else if (command == 'doui')
-{
-    	chrome.storage.sync.set({'doui': 1}, function() {
-	});
-	chrome.storage.sync.set({'dnon': 0}, function() {
-	});
-	chrome.tts.speak('Oui');
-}
-else if (command == 'dnon')
-{
-}
-});
-*/
 
-chrome.commands.onCommand.addListener(function(command) {
+/*  PAGE PARAMETRES */
+$("#filtreDalto").change(function () {
+    if ($("#filtreDalto").prop("checked")) {
+        chrome.storage.sync.set({dalto: "on"}, function () {
+        });
+
+    } else {
+        chrome.storage.sync.set({dalto: "off"}, function () {
+        });
+    }
+});
+$("#lectureClav").change(function () {
+    if ($("#lectureClav").prop("checked")) {
+        chrome.storage.sync.set({lect: "on"}, function () {
+        });
+    } else {
+        chrome.storage.sync.set({lect: "off"}, function () {
+        });
+    }
+});
+/* Suppression ou remise en place des éléments en fonction de la réponse */
+
+chrome.storage.sync.get(['dalto'], function (result) {
+    if (result.dalto === "off"){
+        $("#partDalto").hide();
+    }
+    else{
+        $("#partDalto").show();
+    }
+});
+//ici il s'agit du script
+chrome.storage.sync.get(['lect'], function (result) {
+    if (result.lect === "off"){
+
+    }
+    else{
+        injectScript("script/keyHighlight.js");
+    }
+});
+
+chrome.commands.onCommand.addListener(function (command) {
     if (command === 'lecture') {
         chrome.tabs.executeScript({
             code: "window.getSelection().toString();"
-        }, function(selection) {
+        }, function (selection) {
             var userLang = navigator.language || navigator.userLanguage;
             chrome.tts.speak(
                 selection[0], {
-                    onEvent: function(event) {
+                    onEvent: function (event) {
                         for (j = 0; j < event.charIndex; j++) {
                             console.log(event.charIndex);
                         }
@@ -112,7 +116,7 @@ chrome.commands.onCommand.addListener(function(command) {
     } else if (command === 'page') {
         chrome.tabs.executeScript({
             code: "document.body.innerText;"
-        }, function(selection) {
+        }, function (selection) {
             var userLang = navigator.language || navigator.userLanguage;
             chrome.tts.speak(selection[0], {
                 'lang': userLang,
@@ -137,27 +141,29 @@ chrome.commands.onCommand.addListener(function(command) {
         injectScript("zoom/zoomMoins.js");
     } else if (command === 'inversion') {
         var invers = 0;
-        chrome.storage.sync.get(['invers'], function(result) {
+        chrome.storage.sync.get(['invers'], function (result) {
             if (result.invers === undefined || result.invers == 0) {
                 chrome.tabs.executeScript({
                     code: `document.body.style='filter: invert(1)';`
                 });
                 chrome.storage.sync.set({
                     'invers': 1
-                }, function() {});
+                }, function () {
+                });
             } else {
                 chrome.tabs.executeScript({
                     code: `document.body.style='filter: invert(0)';`
                 });
                 chrome.storage.sync.set({
                     'invers': 0
-                }, function() {});
+                }, function () {
+                });
             }
         });
     }
 });
 //Jquery qui vérifi tous les boutons radios dès qu'ils changent
-$('input:radio').on('change', function() {
+/*$('input:radio').on('change', function() {
 
     //La vérification du null permet juste de virer une erreur alakon
     if ((document.getElementById('avoui') !== null) && document.getElementById('avoui').checked === true) {
@@ -487,6 +493,8 @@ if (document.getElementById('submitdalt') !== null) {
         window.close();
     });
 }
+*/
+
 
 function changeIcone() {
     if (document.getElementById("micro").className === "ft fas fa-microphone-slash fa-2x colorRed") {
@@ -496,36 +504,38 @@ function changeIcone() {
     }
 }
 
-injectScript("script/keyHighlight.js");
+
 
 //rate est la vitesse de lecture. défini de base à 1
 var rate = 1.0;
 
 if (document.getElementById('rate') !== null) {
-    document.getElementById("rate").addEventListener("change", function() {
+    document.getElementById("rate").addEventListener("change", function () {
         rate = document.getElementById("rate").value;
 
     });
 }
 //Inversion des couleurs
 if (document.getElementById('inversion') !== null) {
-    document.getElementById("inversion").addEventListener("click", function() {
+    document.getElementById("inversion").addEventListener("click", function () {
         var invers = 0;
-        chrome.storage.sync.get(['invers'], function(result) {
+        chrome.storage.sync.get(['invers'], function (result) {
             if (result.invers === undefined || result.invers == 0) {
                 chrome.tabs.executeScript({
                     code: `document.body.style='filter: invert(1)';`
                 });
                 chrome.storage.sync.set({
                     'invers': 1
-                }, function() {});
+                }, function () {
+                });
             } else {
                 chrome.tabs.executeScript({
                     code: `document.body.style='filter: invert(0)';`
                 });
                 chrome.storage.sync.set({
                     'invers': 0
-                }, function() {});
+                }, function () {
+                });
             }
         });
 
@@ -533,11 +543,11 @@ if (document.getElementById('inversion') !== null) {
 }
 /* button play lis tout le texte de la page */
 if (document.getElementById('play') !== null) {
-    document.getElementById("play").addEventListener("click", function() {
+    document.getElementById("play").addEventListener("click", function () {
 
         chrome.tabs.executeScript({
             code: "document.body.innerText;"
-        }, function(selection) {
+        }, function (selection) {
             var userLang = navigator.language || navigator.userLanguage;
             chrome.tts.speak(selection[0], {
                 'lang': userLang,
@@ -549,15 +559,15 @@ if (document.getElementById('play') !== null) {
 
 /*Ce que l'utilisateur selection, il le lis*/
 if (document.getElementById('readOnSelect') !== null) {
-    document.getElementById("readOnSelect").addEventListener("click", function() {
+    document.getElementById("readOnSelect").addEventListener("click", function () {
 
         chrome.tabs.executeScript({
             code: "window.getSelection().toString();"
-        }, function(selection) {
+        }, function (selection) {
             var userLang = navigator.language || navigator.userLanguage;
             chrome.tts.speak(
                 selection[0], {
-                    onEvent: function(event) {
+                    onEvent: function (event) {
                         for (j = 0; j < event.charIndex; j++) {
                             console.log(event.charIndex);
                         }
@@ -585,20 +595,20 @@ if (document.getElementById('readOnSelect') !== null) {
 
 /*Zoom sur la page */
 if (document.getElementById('zoomPlus') !== null) {
-    document.getElementById("zoomPlus").addEventListener("click", function() {
+    document.getElementById("zoomPlus").addEventListener("click", function () {
         injectScript("zoom/zoomPlus.js");
     });
 }
 
 /*Zoom moins */
 if (document.getElementById('zoomMoins') !== null) {
-    document.getElementById("zoomMoins").addEventListener("click", function() {
+    document.getElementById("zoomMoins").addEventListener("click", function () {
         injectScript("zoom/zoomMoins.js");
     });
 }
 
 if (document.getElementById('pause') !== null) {
-    document.getElementById("pause").addEventListener("click", function() {
+    document.getElementById("pause").addEventListener("click", function () {
         chrome.tts.pause();
         document.getElementById('resume').style.display = "inline";
         document.getElementById('pause').style.display = "none";
@@ -606,7 +616,7 @@ if (document.getElementById('pause') !== null) {
 }
 
 if (document.getElementById('resume') !== null) {
-    document.getElementById("resume").addEventListener("click", function() {
+    document.getElementById("resume").addEventListener("click", function () {
         chrome.tts.resume();
         document.getElementById('resume').style.display = "none";
         document.getElementById('pause').style.display = "inline";
@@ -614,7 +624,7 @@ if (document.getElementById('resume') !== null) {
 }
 
 if (document.getElementById('stop') !== null) {
-    document.getElementById("stop").addEventListener("click", function() {
+    document.getElementById("stop").addEventListener("click", function () {
         injectScript("script/unhightlight.js");
         chrome.tts.stop();
     });
