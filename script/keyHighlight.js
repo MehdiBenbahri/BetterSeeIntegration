@@ -1,26 +1,18 @@
 var style = document.createElement('style');
 style.type = 'text/css';
-style.innerHTML = '.cssKeyCodeClass{ background-color : rgba(215, 104, 44, 0.2); !important; border:1px dashed #b04d30 !important; font-size : 120%; }';
+style.innerHTML = '.cssKeyCodeClass{ background-color : rgba(215, 104, 44, 0.2); !important; border:1px dashed #b04d30 !important; font-size : 25px; }';
 document.getElementsByTagName('head')[0].appendChild(style);
 
-var elems = document.querySelectorAll('p,li,a,button,input,h1,h2,h3,h4,h5,h6,i,b,u,small,div,span,label,img');
+var elems = document.querySelectorAll('p,li,a,button,input,h1,h2,h3,h4,h5,h6,i,b,u,small,label,img');
 var index = 0;
 document.onkeydown = checkKey;
-/*
-TENTATIVE DE NETTOYAGE TO DO.
-for(var i = 0 ; i < elems.length ; i++){
-    if (elems[i].innerText === "" || elems[i].innerText === " " || typeof(elems[i].innerText) !== "string"){
-        elems = elems.splice(i,1);
-    }
-}
-console.log("élément : " . elems);*/
 
 
 function checkKey(e) {
     var synth = window.speechSynthesis;
     e = e || window.event;
 
-    if (e.keyCode == '37') {
+    if (e.shiftKey) {
         if (synth.speaking){
             synth.cancel();
         }
@@ -57,7 +49,7 @@ function checkKey(e) {
         }
 
     }
-    else if (e.keyCode == '39') {
+    else if (e.ctrlKey) {
         if (synth.speaking){
             synth.cancel();
         }
@@ -96,8 +88,8 @@ function checkKey(e) {
         }
 
     }
-    else if (e.keyCode == '40') {
-        console.log(elems[index].innerText);
+    else if (e.altKey) {
+
         if (elems[index].tagName === "IMG"){
             var msg = new SpeechSynthesisUtterance(elems[index].alt);
             synth.speak(msg);
@@ -106,7 +98,6 @@ function checkKey(e) {
             var msg = new SpeechSynthesisUtterance(elems[index].innerText);
             synth.speak(msg);
         }
-
 
     }
 

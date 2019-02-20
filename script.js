@@ -1,23 +1,31 @@
+
+/*Icon*/
+chrome.browserAction.setIcon({path:"img/logobettersee.png"});
 /*Animation des éléments : */
 $("#optionDocu").hide();
 $("#optionPropos").hide();
 $("#optionParam").effect("slide", {direction: "down"});
 
-
 $("#btnParam").click(function () {
     $("#optionPropos").hide("slide", {direction: "up"});
     $("#optionDocu").hide("slide", {direction: "up"});
     $("#optionParam").show("slide", {direction: "down"});
+    chrome.tts.speak("onglet paramètre");
+    $("#video").get(0).pause();
 });
 $("#btnDocu").click(function () {
     $("#optionPropos").hide("slide", {direction: "up"});
     $("#optionParam").hide("slide", {direction: "up"});
     $("#optionDocu").show("slide", {direction: "down"});
+    chrome.tts.stop();
+    $("#video").get(0).play();
 });
 $("#btnPropos").click(function () {
     $("#optionParam").hide("slide", {direction: "up"});
     $("#optionDocu").hide("slide", {direction: "up"});
     $("#optionPropos").show("slide", {direction: "down"});
+    chrome.tts.speak("onglet à propos");
+    $("#video").get(0).pause();
 });
 
 $("#opBtn").effect("bounce", {
@@ -41,7 +49,12 @@ function injectScript(fileName) {
         file: fileName
     });
 }
-
+$("#para").click(function(){
+    chrome.tabs.create({
+        url: "option.html"
+    }, function(tab) {
+    });
+});
 
 /*  PAGE PARAMETRES */
 $("#filtreDalto").change(function () {
@@ -79,6 +92,7 @@ chrome.storage.sync.get(['lect'], function (result) {
 
     }
     else{
+
         injectScript("script/keyHighlight.js");
     }
 });
@@ -162,338 +176,7 @@ chrome.commands.onCommand.addListener(function (command) {
         });
     }
 });
-//Jquery qui vérifi tous les boutons radios dès qu'ils changent
-/*$('input:radio').on('change', function() {
 
-    //La vérification du null permet juste de virer une erreur alakon
-    if ((document.getElementById('avoui') !== null) && document.getElementById('avoui').checked === true) {
-        //On sauvegarde cette option dans chrome, y compris en sync.
-        chrome.storage.sync.set({
-            'avoui': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'avnon': 0
-        }, function() {});
-        chrome.tts.speak('Oui');
-        //Je ferme déjà vu qu'un aveugle n'est pas daltonien ni malvoyant...
-        window.close();
-    } else if ((document.getElementById('avnon') !== null) && (document.getElementById('avnon').checked === true)) {
-        chrome.storage.sync.set({
-            'avnon': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'avoui': 0
-        }, function() {});
-        chrome.tts.speak('Non');
-        //Je me TP au deuxieme menu option qui demande si la personne est mal voyante et/ou daltonienne.
-        window.location.href = "option2.html";
-    } else if ((document.getElementById('mvoui') !== null) && document.getElementById('mvoui').checked === true) {
-        chrome.storage.sync.set({
-            'mvoui': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'mvnon': 0
-        }, function() {});
-        chrome.tts.speak('Oui');
-    } else if ((document.getElementById('mvnon') !== null) && document.getElementById('mvnon').checked === true) {
-        chrome.storage.sync.set({
-            'mvoui': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'mvnon': 1
-        }, function() {});
-        chrome.tts.speak('Non');
-    } else if ((document.getElementById('doui') !== null) && document.getElementById('doui').checked === true) {
-        chrome.storage.sync.set({
-            'doui': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'dnon': 0
-        }, function() {});
-        chrome.tts.speak('Oui');
-    } else if ((document.getElementById('dnon') !== null) && document.getElementById('dnon').checked === true) {
-        chrome.storage.sync.set({
-            'doui': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'dnon': 1
-        }, function() {});
-        chrome.tts.speak('Non');
-    } else if ((document.getElementById('radio-0') !== null) && document.getElementById('radio-0').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-1') !== null) && document.getElementById('radio-1').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-2') !== null) && document.getElementById('radio-2').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-3') !== null) && document.getElementById('radio-3').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-4') !== null) && document.getElementById('radio-4').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-5') !== null) && document.getElementById('radio-5').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 5
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-6') !== null) && document.getElementById('radio-6').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-7') !== null) && document.getElementById('radio-7').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 1
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 0
-        }, function() {});
-    } else if ((document.getElementById('radio-8') !== null) && document.getElementById('radio-8').checked === true) {
-        chrome.storage.sync.set({
-            'radio-0': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-1': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-2': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-3': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-4': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-5': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-6': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-7': 0
-        }, function() {});
-        chrome.storage.sync.set({
-            'radio-8': 1
-        }, function() {});
-    }
-
-    if (document.getElementById('sbmtmal') !== null) {
-        document.getElementById("sbmtmal").addEventListener("click", function() {
-            chrome.storage.sync.get(['doui'], function(result) {
-                if (result.doui === 1) {
-                    //Je me TP à la troisième option : le menu daltonien
-                    window.location.href = "option3.html";
-                } else {
-                    window.close();
-                }
-            });
-        });
-    }
-});
-
-if (document.getElementById('submitdalt') !== null) {
-    alert('ok');
-    document.getElementById("submitdalt").addEventListener("click", function() {
-        window.close();
-    });
-}
-*/
 
 
 function changeIcone() {
@@ -629,3 +312,4 @@ if (document.getElementById('stop') !== null) {
         chrome.tts.stop();
     });
 }
+injectScript("script/nettoyage.js");

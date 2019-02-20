@@ -1,43 +1,43 @@
 {
-  "name" :"Better See",
-  "manifest_version" : 3,
-  "version" :"0.4",
-  "description" :"une extention pour y voir plus clair",
-  "browser_action" :
-  {
-    "default_popup" :"index.html"
+  "name": "Better See",
+  "manifest_version": 3,
+  "version": "0.4",
+  "description": "une extention pour y voir plus clair",
+  "browser_action": {
+    "default_popup": "index.html"
   },
-     "background": {
-      "scripts": ["background.js"],
-      "persistent": false
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "tout lire"
     },
-	"commands": {
-		"page": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+Y"
-			},
-			"description": "tout lire"
-		},
-		"pause": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+Z"
-			},
-			"description": "pause le tts"
-		},
-		"resume": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+Z"
-			},
-			"description": "Reprend la lecture"
-		},
-		"stop": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+Z"
-			},
-			"description": "arrête le tts"
-		}
-	},
-		
+    "pause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "pause le tts"
+    },
+    "resume": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "Reprend la lecture"
+    },
+    "stop": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "arrête le tts"
+    }
+  },
   "permissions": [
     "https://*/*",
     "http://*/*",
@@ -47,6 +47,6 @@
     "tts",
     "ttsEngine",
     "background",
-	"<all_urls>"
+    "<all_urls>"
   ]
 }
